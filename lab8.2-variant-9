@@ -1,0 +1,90 @@
+Зав1.а
+#include <iostream>
+#include <vector>
+#include <algorithm>
+double averageOfTwoMin(const std::vector<double>& arr) {
+if (arr.size() < 2) {
+// Якщо у масиві менше двох елементів, повертаємо 0.
+return 0.0;
+}
+// Сортуємо масив, щоб знайти два найменших елементи.
+std::vector<double> sortedArr = arr;
+std::sort(sortedArr.begin(), sortedArr.end());
+// Обчислюємо середнє арифметичне двох найменших елементів.
+return (sortedArr[0] + sortedArr[1]) / 2.0;
+}
+int main() {
+// Приклад використання:
+std::vector<double> array = {5.4, 3.2, 7.1, 1.9, 9.6};
+double result = averageOfTwoMin(array);
+std::cout << "Середнє арифметичне двох найменших елементів: " <<
+result << std::endl;
+return 0;
+}
+
+Зав1.в
+#include <iostream>
+#include <vector>
+double sumBetweenNegatives(const std::vector<double>& arr) {
+int firstNegativeIndex = -1;
+int secondNegativeIndex = -1;
+// Знаходимо індекс першого від'ємного елемента.
+for (int i = 0; i < arr.size(); ++i) {
+if (arr[i] < 0) {
+firstNegativeIndex = i;
+break;
+}
+}
+// Знаходимо індекс другого від'ємного елемента.
+for (int i = firstNegativeIndex + 1; i < arr.size(); ++i) {
+if (arr[i] < 0) {
+secondNegativeIndex = i;
+break;
+}
+}
+// Якщо в масиві немає двох від'ємних елементів, повертаємо 0.
+if (firstNegativeIndex == -1 || secondNegativeIndex == -1) {
+return 0.0;
+}
+// Обчислюємо суму елементів масиву між першим і другим від'ємними
+елементами.
+double sum = 0.0;
+for (int i = firstNegativeIndex + 1; i < secondNegativeIndex; ++i) {
+sum += arr[i];
+}
+return sum;
+}
+int main() {
+std::vector<double> array = {1.5, -2.3, 4.7, 3.2, -1.8, 5.6};
+double result = sumBetweenNegatives(array);
+std::cout << "Сума елементів масиву між першим і другим від'ємними
+елементами: " << result << std::endl;
+return 0;
+}
+
+
+Зав2.
+#include <iostream>
+#include <vector>
+void replaceWithSumOfPrevious(std::vector<double>& arr) {
+if (arr.size() <= 1) {
+return;
+}
+for (int i = 1; i < arr.size(); ++i) {
+double sum = 0.0;
+for (int j = 0; j < i; ++j) {
+sum += arr[j];
+}
+arr[i] = sum;
+}
+}
+int main() {
+std::vector<double> array = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
+replaceWithSumOfPrevious(array);
+std::cout << "changed array: ";
+for (double num : array) {
+std::cout << num << " ";
+}
+std::cout << std::endl;
+return 0;
+}
